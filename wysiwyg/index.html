@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="zh-cn" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="zh-cn" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zh-cn" class="no-js">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8"/>
+    <title>富文本编辑</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+    <link type="text/css" rel="stylesheet" href="../assets/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="../assets/font/font-awesome.min.css">
+    <style>
+        <!--
+        .wysiwyg-editor {
+            max-height: 250px;
+            height: 250px;
+            background-color: #f7f8fa;
+            border-collapse: separate;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 4px;
+            box-sizing: content-box;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            outline: 0
+        }
+
+        .wysiwyg-editor:focus {
+            background-color: #FFF
+        }
+
+        .wysiwyg-toolbar {
+            line-height: 32px;
+            margin: 0 !important
+        }
+
+        .wysiwyg-toolbar .dropdown-menu {
+            text-align: left
+        }
+
+        .wysiwyg-toolbar .btn-group {
+            float: none;
+            font-size: 0
+        }
+
+        .wysiwyg-toolbar .btn-group > .btn, .wysiwyg-toolbar .btn-group > .inline > .btn {
+            float: none;
+            padding-left: 0;
+            padding-right: 0;
+            text-align: center;
+            border-width: 2px;
+            margin-left: 1px
+        }
+
+        .wysiwyg-toolbar .btn-group > .btn > [class*="fa-"]:first-child, .wysiwyg-toolbar .btn-group > .inline > .btn > [class*="fa-"]:first-child {
+            font-size: 14px;
+            width: 25px;
+            max-width: 25px;
+            display: inline-block;
+            border-width: 1px !important
+        }
+
+        .wysiwyg-toolbar .btn-group > .btn.dropdown-toggle > [class*="fa-"]:last-child, .wysiwyg-toolbar .btn-group > .inline > .btn.dropdown-toggle > [class*="fa-"]:last-child {
+            margin-right: 4px
+        }
+
+        .wysiwyg-toolbar .btn-group > .btn.active:after, .wysiwyg-toolbar .btn-group > .inline > .btn.active:after {
+            border-color: transparent;
+            border-style: solid;
+            border-top-color: inherit;
+            border-width: 6px 14px;
+            bottom: -13px;
+            left: 0;
+            right: 0
+        }
+
+        .wysiwyg-style1 .btn-group > .btn, .wysiwyg-style2 .btn-group > .btn, .wysiwyg-style1 .btn-group > .inline > .btn, .wysiwyg-style2 .btn-group > .inline > .btn {
+            margin: 0 !important;
+            background: #FFF !important;
+            border: none !important;
+            color: #adb3be !important;
+            text-shadow: none !important
+        }
+
+        .wysiwyg-style1 .btn-group > .btn.active, .wysiwyg-style2 .btn-group > .btn.active, .wysiwyg-style1 .btn-group > .inline > .btn.active, .wysiwyg-style2 .btn-group > .inline > .btn.active {
+            color: #5b80ce !important
+        }
+
+        .wysiwyg-style1 .btn-group > .btn.active:after, .wysiwyg-style2 .btn-group > .btn.active:after, .wysiwyg-style1 .btn-group > .inline > .btn.active:after, .wysiwyg-style2 .btn-group > .inline > .btn.active:after {
+            display: none
+        }
+
+        .wysiwyg-style1 .btn-group, .wysiwyg-style2 .btn-group {
+            position: relative
+        }
+
+        .wysiwyg-style1 .btn-group:after, .wysiwyg-style2 .btn-group:after {
+            display: block;
+            content: "";
+            position: absolute;
+            left: -2px;
+            width: 0;
+            max-width: 0;
+            top: 6px;
+            bottom: 6px;
+            border-left: 1px solid #e1e6ea
+        }
+
+        .wysiwyg-style1 .btn-group:first-child:after, .wysiwyg-style2 .btn-group:first-child:after {
+            display: none
+        }
+
+        .wysiwyg-style2 {
+            background-color: #e5e5e5
+        }
+
+        .wysiwyg-style2 + .wysiwyg-editor {
+            border-color: #DDD;
+            background-color: #FFF;
+            border-top: 0
+        }
+
+        .wysiwyg-style2 .btn-group > .btn, .wysiwyg-style2 .btn-group > .inline > .btn {
+            margin: 0 1px 0 0 !important;
+            background: #FFF !important;
+            border: none !important;
+            color: #8d939e !important;
+            text-shadow: none !important
+        }
+
+        .wysiwyg-style2 .btn-group > .btn.active, .wysiwyg-style2 .btn-group > .inline > .btn.active {
+            color: #FFF !important;
+            background: #6aaedf !important
+        }
+
+        .wysiwyg-style2 .btn-group:after {
+            display: none
+        }
+
+        .wysiwyg-toolbar .btn-colorpicker {
+            width: 24px;
+            height: 24px;
+            position: relative;
+            background: #87b87f;
+            background: -moz-linear-gradient(top, #cf3e73 10%, #fff 20%, #2283c5 30%, #fff 40%, #87b87f 50%, #fff 60%, #ffb752 70%, #fff 80%, #d15b47 90%, #fff 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #cf3e73), color-stop(20%, #fff), color-stop(30%, #2283c5), color-stop(40%, #fff), color-stop(50%, #87b87f), color-stop(60%, #fff), color-stop(70%, #ffb752), color-stop(80%, #fff), color-stop(90%, #d15b47), color-stop(100%, #fff));
+            background: -webkit-linear-gradient(top, #cf3e73 10%, #fff 20%, #2283c5 30%, #fff 40%, #87b87f 50%, #fff 60%, #ffb752 70%, #fff 80%, #d15b47 90%, #fff 100%);
+            background: -o-linear-gradient(top, #cf3e73 10%, #fff 20%, #2283c5 30%, #fff 40%, #87b87f 50%, #fff 60%, #ffb752 70%, #fff 80%, #d15b47 90%, #fff 100%);
+            background: -ms-linear-gradient(top, #cf3e73 10%, #fff 20%, #2283c5 30%, #fff 40%, #87b87f 50%, #fff 60%, #ffb752 70%, #fff 80%, #d15b47 90%, #fff 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#CF3E73', endColorstr='#FFB752', GradientType=0);
+            background: linear-gradient(top, #cf3e73 10%, #fff 20%, #2283c5 30%, #fff 40%, #87b87f 50%, #fff 60%, #ffb752 70%, #fff 80%, #d15b47 90%, #fff 100%)
+        }
+
+        .wysiwyg-toolbar .dropdown-colorpicker > .dropdown-menu {
+            top: inherit
+        }
+
+        .wysiwyg-toolbar input[type=file] {
+            position: fixed;
+            z-index: -10;
+            opacity: 0;
+            max-width: 0;
+            max-height: 0;
+            display: block
+        }
+
+        .wysiwyg-toolbar .wysiwyg-choose-file {
+            display: inline-block;
+            width: auto;
+            margin: 4px auto 0;
+            padding-left: 5px;
+            padding-right: 5px
+        }
+
+        .wysiwyg-toolbar .dropdown-menu input[type=text] {
+            margin-left: 8px;
+            margin-bottom: 0
+        }
+
+        .wysiwyg-toolbar .dropdown-menu input[type=text].form-control {
+            min-width: 150px
+        }
+
+        .wysiwyg-toolbar .dropdown-menu .btn {
+            margin-right: 8px;
+            margin-left: 1px
+        }
+
+        .wysiwyg-style1 .btn-colorpicker {
+            width: 20px;
+            height: 20px
+        }
+
+        @media screen and (-webkit-min-device-pixel-ratio: 0) {
+            .wysiwyg-editor img {
+                display: inline !important
+            }
+
+            .wysiwyg-editor .ui-wrapper {
+                border: 1px dotted #D00;
+                overflow: visible !important;
+                display: inline-block !important;
+                vertical-align: middle
+            }
+
+            .wysiwyg-editor .ui-wrapper:after {
+                content: "";
+                display: block;
+                position: absolute;
+                right: -3px;
+                bottom: -3px;
+                width: 7px;
+                height: 7px;
+                border: 1px solid #D00;
+                background-color: #FFF;
+                z-index: 1
+            }
+        }
+
+        .widget-header .wysiwyg-toolbar {
+            background-color: transparent
+        }
+
+        .widget-header .wysiwyg-toolbar .btn-group > .btn, .widget-header .wysiwyg-toolbar .btn-group > .inline > .btn {
+            border-color: transparent;
+            background: rgba(255, 255, 255, 0.25) !important;
+            color: #FFF !important;
+            border-width: 1px
+        }
+
+        .widget-header .wysiwyg-toolbar .btn-group > .btn.active, .widget-header .wysiwyg-toolbar .btn-group > .inline > .btn.active {
+            background: rgba(0, 0, 0, 0.25) !important
+        }
+
+        .widget-body .wysiwyg-editor {
+            border: 0
+        }
+
+        .wysiwyg-speech-input {
+            width: 20px !important;
+            color: transparent !important;
+            background: transparent none !important;
+            border: none !important;
+            -moz-transform: scale(2.0, 2.0);
+            -webkit-transform: scale(2.0, 2.0);
+            -o-transform: scale(2.0, 2.0);
+            -ms-transform: scale(2.0, 2.0);
+            transform: scale(2.0, 2.0);
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            cursor: pointer
+        }
+
+        .wysiwyg-speech-input:focus {
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important
+        }
+
+        .widget-body .md-header {
+            margin-top: -30px;
+            margin-left: 9px
+        }
+
+        .widget-body .md-header .btn {
+            border-color: transparent;
+            background: rgba(255, 255, 255, 0.25) !important;
+            color: #FFF !important;
+            text-align: center;
+            padding-left: 0;
+            padding-right: 0;
+            border-width: 1px !important;
+            padding-top: 2px;
+            padding-bottom: 4px
+        }
+
+        .widget-body .md-header .btn > [class*="fa-"] {
+            font-size: 14px;
+            width: 25px;
+            max-width: 25px;
+            display: inline-block
+        }
+
+        .widget-body .md-header .btn-inverse {
+            background: rgba(0, 0, 0, 0.25) !important;
+            padding-right: 5px;
+            margin-left: 4px
+        }
+
+        .widget-body .md-preview {
+            padding: 8px;
+            min-height: 200px
+        }
+
+        .widget-body .md-input {
+            border: none !important;
+            box-shadow: none !important;
+            display: block;
+            margin-bottom: 0;
+            background-color: rgba(48, 126, 204, 0.07);
+            padding: 8px;
+            width: 100%
+        }
+
+        .widget-body .md-input:focus {
+            background-color: #FFF;
+            box-shadow: none !important
+        }
+
+        .editable-container .popover-title {
+            color: #438eb9
+        }
+
+        .editable-click {
+            border-bottom: 1px dashed #BBB;
+            cursor: pointer;
+            font-weight: normal
+        }
+
+        img.editable-click {
+            border: 1px dotted #BBB
+        }
+
+        .editable-click:hover {
+            border-color: #08c;
+            color: #08c
+        }
+
+        img.editable-click:hover {
+            opacity: .75;
+            filter: alpha(opacity=75)
+        }
+
+        .editable-buttons, .editable-input {
+            display: inline-block
+        }
+
+        .editable-buttons {
+            margin-left: 1px
+        }
+
+        .editable-buttons .btn {
+            padding: 0;
+            width: 28px;
+            line-height: 24px;
+            border-width: 3px;
+            font-size: 12px;
+            margin: 0 1px 0 0
+        }
+
+        .editable-buttons .btn > [class*="fa-"] {
+            margin: 0
+        }
+
+        .editable-clear-x {
+            cursor: pointer;
+            color: #888;
+            background: 0
+        }
+
+        .editable-clear-x:hover {
+            color: #d15b47
+        }
+
+        .editable-clear-x:before {
+            display: inline-block;
+            content: "\f057";
+            font-family: FontAwesome;
+            font-size: 15px;
+            position: absolute;
+            margin-top: -9px;
+            width: 16px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center
+        }
+
+        .editable-input .ace-spinner {
+            margin-right: 8px
+        }
+
+        .editable-inline .editable-slider {
+            margin-top: 10px;
+            margin-right: 4px
+        }
+
+        .editable-popup .editable-slider {
+            display: block;
+            margin-bottom: 16px;
+            margin-top: 4px
+        }
+
+        .editable-slider input {
+            display: none
+        }
+
+        .editable-input .ace-file-input {
+            display: block
+        }
+
+        .editable-image .ace-file-multiple label.selected {
+            border-color: transparent
+        }
+
+        .editable-image + .editable-buttons, .editable-wysiwyg + .editable-buttons {
+            display: block;
+            text-align: center;
+            margin-top: 8px
+        }
+
+        .editable-wysiwyg {
+            width: 95%
+        }
+
+        .editable-wysiwyg .wysiwyg-editor {
+            height: auto;
+            overflow-y: hidden
+        }
+
+        .editableform .input-append.dropdown-menu {
+            display: none
+        }
+
+        .editableform .open .input-append.dropdown-menu {
+            display: block
+        }
+
+        .editable-container .editableform {
+            margin-bottom: 10px
+        }
+
+        .editable-inline .editableform {
+            margin-bottom: 0
+        }
+
+        .editableform-loading {
+            background: 0
+        }
+
+        .editableform-loading [class*="fa-"], .editableform-loading .progress {
+            position: relative;
+            top: 35%
+        }
+        .inline {
+            display: inline-block !important;
+        }
+        .btn-colorpicker {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: #DDD;
+            vertical-align: middle;
+            border-radius: 0;
+        }
+        -->
+    </style>
+</head>
+<body style="padding: 20px;">
+<div class="wysiwyg-editor" data-BUCKET="qtestbucket" data-token="iN7NgwM31j4-BZacMjPrOQBs34UG1maYCAQmhdCV:JvAAtZJQQAyYFb0EiTnFCF-kjqc=:eyJzY29wZSI6InF0ZXN0YnVja2V0IiwiZGVhZGxpbmUiOjEzOTY0Mjc2NjN9"></div>
+<script src="../assets/js/lib/jquery.js"></script>
+<script src="../assets/js/lib/bootstrap.min.js"></script>
+<script src="../assets/js/lib/bootstrap-wysiwyg.min.js"></script>
+<script>
+    function showErrorAlert (reason, detail) {
+        var msg='';
+        if (reason==='unsupported-file-type') { msg = "Unsupported format " +detail; }
+        else {
+            console.log("error uploading file", reason, detail);
+        }
+        $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+
+                '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
+    }
+    function ace_wysiwygFn(){
+        $('.wysiwyg-editor').ace_wysiwyg({
+            toolbar:
+                    [
+                        'font',
+                        null,
+                        'fontSize',
+                        null,
+                        {name:'bold', className:'btn-info'},
+                        {name:'italic', className:'btn-info'},
+                        {name:'strikethrough', className:'btn-info'},
+                        {name:'underline', className:'btn-info'},
+                        null,
+                        {name:'insertunorderedlist', className:'btn-success'},
+                        {name:'insertorderedlist', className:'btn-success'},
+                        {name:'outdent', className:'btn-purple'},
+                        {name:'indent', className:'btn-purple'},
+                        null,
+                        {name:'justifyleft', className:'btn-primary'},
+                        {name:'justifycenter', className:'btn-primary'},
+                        {name:'justifyright', className:'btn-primary'},
+                        {name:'justifyfull', className:'btn-inverse'},
+                        null,
+                        {name:'createLink', className:'btn-pink'},
+                        {name:'unlink', className:'btn-pink'},
+                        null,
+                        {name:'insertImage', className:'btn-success'},
+                        null,
+                        'foreColor',
+                        null,
+                        {name:'undo', className:'btn-grey'},
+                        {name:'redo', className:'btn-grey'},
+                    ],
+            'wysiwyg': {
+                fileUploadError: showErrorAlert
+            }
+        }).prev().addClass('wysiwyg-style1');
+    }
+    $(function () {
+        ace_wysiwygFn();
+    });
+</script>
+</body>
+</html>
