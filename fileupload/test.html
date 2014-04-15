@@ -1,0 +1,37 @@
+<input type="file" id="upload"/>
+<script>
+    var oReq = new XMLHttpRequest();
+
+    oReq.addEventListener("progress", updateProgress, false);
+    oReq.addEventListener("load", transferComplete, false);
+    oReq.addEventListener("error", transferFailed, false);
+    oReq.addEventListener("abort", transferCanceled, false);
+
+    oReq.open();
+
+    // ...
+
+    // progress on transfers from the server to the client (downloads)
+    function updateProgress (oEvent) {
+        if (oEvent.lengthComputable) {
+            var percentComplete = oEvent.loaded / oEvent.total;
+            // ...
+        } else {
+            console.log("eee");
+        }
+    }
+
+    function transferComplete(evt) {
+        alert("The transfer is complete.");
+    }
+
+    function transferFailed(evt) {
+        alert("An error occurred while transferring the file.");
+    }
+
+    function transferCanceled(evt) {
+        alert("The transfer has been canceled by the user.");
+    }
+</script>
+<script>
+</script>
